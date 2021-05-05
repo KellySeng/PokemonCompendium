@@ -3,45 +3,18 @@ import {useReducer} from 'react'
 import { InputGroup, FormControl, DropdownButton, Dropdown, Button, Spinner, Col, Row, Container, Media } from 'react-bootstrap'
 import fetchPokemonData from '../actions/fetchPokemonData'
 import  DisplaySprites from './DisplaySprites'
-
-type SearchPokemonProps = {
-    searchCategories: string[]
-}
-
-type SearchPokemonState = {
-    categorySelected: string,
-    valueSearched: string,
-}
-
-type Action<T> =
-| { type: 'empty' }
-| { type: 'loading' }
-| { type: 'success', results: T }
-| { type: 'failure', error: number };
-
-type State<T> =
-| { status: 'empty' }
-| { status: 'loading' }
-| { status: 'error', error: number }
-| { status: 'success', data: T }
+import  DisplayTypes from './DisplayTypes'
+import reducer from '../reducer/Reducer'
 
 
-function reducer<S>(state: State<S>, action: Action<S>): State<S> {
-    switch (action.type) {
-        case 'loading': return { status: 'loading' };
-        case 'success': return { status: 'success', data: action.results };
-        case 'failure': return { status: 'error', error: action.error };
-        case 'empty': return { status: 'empty' }
-    }
-}
-
-export default function SearchPokemon ({searchCategories}: SearchPokemonProps) {
-    const [searchPokemonState, setSearchPokemonState] = React.useState<SearchPokemonState>({
+export default function SearchPokemon ({searchCategories}: PokemonTypings.SearchPokemonProps): JSX.Element {
+    const [searchPokemonState, setSearchPokemonState] = React.useState<PokemonTypings.SearchPokemonState>({
         categorySelected: searchCategories[0],
         valueSearched: '',
+        loading: false
     })
 
-    const[dispatchState, dispatch] = useReducer<React.Reducer<State<PokemonTypings.PokemonData>, Action<PokemonTypings.PokemonData>>>(reducer, {status : 'empty'})
+    const[state, dispatch] = useReducer<React.Reducer<PokemonTypings.SearchPokemonState, PokemonReducerTypes.Action<PokemonTypings.PokemonData>>>(reducer, searchPokemonState)
     const { categorySelected, valueSearched } = searchPokemonState
     return <div>
           <InputGroup className="mb-3">
@@ -63,7 +36,6 @@ export default function SearchPokemon ({searchCategories}: SearchPokemonProps) {
                     type="submit" 
                     onClick={() => {
                         setSearchPokemonState({...searchPokemonState})
-                        dispatch({ type: 'loading'});
                         fetchPokemonData<PokemonTypings.PokemonData>(valueSearched.toLowerCase()).then(response => {
                             dispatch({ type: 'success', results : response });
                         })
@@ -73,15 +45,16 @@ export default function SearchPokemon ({searchCategories}: SearchPokemonProps) {
             </InputGroup.Append>     
         </InputGroup>
 
-        {dispatchState.status == 'loading' && <Spinner animation="border"/>}
-        {dispatchState.status == 'success' && dispatchState.data &&
-        <Container>
-            <Row>
-                <Col md="auto">{dispatchState.data.id}</Col>
-                <Col>{dispatchState.data.name}</Col>
-                {dispatchState.data.types.map(item => <Col>{item.type.name}</Col>)}
-            </Row>
-            <DisplaySprites sprites={dispatchState.data.sprites}/>
-        </Container>}
+        {state.pokemon && 
+            <Container>
+                <Row>
+                    <Col md="auto">{state.pokemon.id}</Col>
+                    <Col>{state.pokemon.name}</Col>
+                    <DisplayTypes types={state.pokemon.types}/>
+                </Row>
+                <DisplaySprites sprites={state.pokemon.sprites}/>
+            </Container>
+        }
     </div>
 }
+
