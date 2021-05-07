@@ -1,7 +1,7 @@
-export default function reducer<S>(state: PokemonTypings.SearchPokemonState, action: PokemonReducerTypes.Action<PokemonTypings.PokemonData>): PokemonTypings.SearchPokemonState {
+export default function reducer<S>(state: PokemonTypings.SearchPokemonState, action: PokemonReducerTypes.Action): PokemonTypings.SearchPokemonState {
     switch (action.type) {
         case 'success': 
-            return {...state, pokemon: action.results};
+            return {...state, pokemonInformation:{ pokemonData: action.results.pokemonData, pokemonSpecies: action.results.pokemonSpecies, typeEffectiveness: action.results.typeEffectiveness}};
             break
         case 'failure': 
             return {...state, error: action.error};

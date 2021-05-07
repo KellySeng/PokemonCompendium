@@ -38,7 +38,7 @@
     background-color: #78C850;
 }
 
-.badge-grass {
+.badge-ground {
     background-color: #E0C068;
 }
 
@@ -68,4 +68,8 @@
 
 .badge-water {
     background-color: #6890F0;
+}
+
+.title {
+    text-transform: capitalize;
 }

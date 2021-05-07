@@ -1,11 +1,9 @@
 import * as React from 'react'
 import {useReducer} from 'react'
 import { InputGroup, FormControl, DropdownButton, Dropdown, Button, Spinner, Col, Row, Container, Media } from 'react-bootstrap'
-import fetchPokemonData from '../actions/fetchPokemonData'
-import  DisplaySprites from './DisplaySprites'
-import  DisplayTypes from './DisplayTypes'
+import {fetchPokemonData} from '../actions/fetchPokemonData'
 import reducer from '../reducer/Reducer'
-
+import DisplayPokemon from './DisplayPokemon'
 
 export default function SearchPokemon ({searchCategories}: PokemonTypings.SearchPokemonProps): JSX.Element {
     const [searchPokemonState, setSearchPokemonState] = React.useState<PokemonTypings.SearchPokemonState>({
@@ -14,7 +12,7 @@ export default function SearchPokemon ({searchCategories}: PokemonTypings.Search
         loading: false
     })
 
-    const[state, dispatch] = useReducer<React.Reducer<PokemonTypings.SearchPokemonState, PokemonReducerTypes.Action<PokemonTypings.PokemonData>>>(reducer, searchPokemonState)
+    const[state, dispatch] = useReducer(reducer, searchPokemonState)
     const { categorySelected, valueSearched } = searchPokemonState
     return <div>
           <InputGroup className="mb-3">
@@ -36,7 +34,7 @@ export default function SearchPokemon ({searchCategories}: PokemonTypings.Search
                     type="submit" 
                     onClick={() => {
                         setSearchPokemonState({...searchPokemonState})
-                        fetchPokemonData<PokemonTypings.PokemonData>(valueSearched.toLowerCase()).then(response => {
+                        fetchPokemonData(valueSearched.toLowerCase()).then(response => {
                             dispatch({ type: 'success', results : response });
                         })
                     }}>
@@ -44,17 +42,9 @@ export default function SearchPokemon ({searchCategories}: PokemonTypings.Search
                 </Button>
             </InputGroup.Append>     
         </InputGroup>
-
-        {state.pokemon && 
-            <Container>
-                <Row>
-                    <Col md="auto">{state.pokemon.id}</Col>
-                    <Col>{state.pokemon.name}</Col>
-                    <DisplayTypes types={state.pokemon.types}/>
-                </Row>
-                <DisplaySprites sprites={state.pokemon.sprites}/>
-            </Container>
-        }
+            
+            
+        {state.pokemonInformation && <DisplayPokemon pokemon={state.pokemonInformation}/>}
     </div>
 }
 
