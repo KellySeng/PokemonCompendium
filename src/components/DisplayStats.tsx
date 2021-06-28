@@ -11,6 +11,15 @@ export default class DisplayStats extends React.Component<DisplayStatsProps> {
         super(props)
     }
 
+    getPokemonStatRankByValue(value: number) {
+        if(value < 30) return "rank-1"
+        if(value >= 30 && value < 60) return "rank-2"
+        if(value >= 60 && value < 90) return "rank-3"
+        if(value >= 90 && value < 120) return "rank-4"
+        if(value >= 120 && value < 150) return "rank-5"
+        else return "rank-6"
+    }
+
     render() {
         const stats = this.props.stats
         return (
@@ -23,7 +32,7 @@ export default class DisplayStats extends React.Component<DisplayStatsProps> {
                             <tr>
                                 <td className="stat-name">{item.stat.name.replace('-', ' ')}</td>
                                 <td className="stat-value">{item.base_stat}</td>
-                                <td className="stat-bar"><ProgressBar variant={item.stat.name} max={255} now={item.base_stat}/></td>
+                                <td className="stat-bar"><ProgressBar variant={this.getPokemonStatRankByValue(item.base_stat)} max={255} now={item.base_stat}/></td>
                             </tr>
                         )})}   
                          <tr>

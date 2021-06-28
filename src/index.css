@@ -87,26 +87,26 @@
     text-transform: capitalize;
 }
 
-.progress-hp {
-    color:red
+.bg-rank-1 {
+    background-color:rgba(236, 78, 78, 0.911)
 }
 
-.progress-attack {
-
+.bg-rank-2 {
+    background-color: orange
 }
 
-.progress-defense {
-    
+.bg-rank-3 {
+    background-color: yellow
 }
 
-.progress-special-attack {
-    
+.bg-rank-4 {
+    background-color: lightgreen
 }
 
-.progress-special-defense {
-    
+.bg-rank-5 {
+    background-color : rgb(74, 202, 74)
 }
 
-.progress-speed {
- color:#6890F0
+.bg-rank-6 {
+    background-color : turquoise
 }
