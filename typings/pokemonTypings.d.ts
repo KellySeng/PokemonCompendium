@@ -88,5 +88,6 @@ declare namespace PokemonTypings {
 declare namespace PokemonReducerTypes {
     type Action =
     | { type: 'success', results: PokemonInformation}
-    | { type: 'failure', error: number };
+    | { type: 'failure', error: number }
+    | { type: 'loading', loading: boolean};
 }
