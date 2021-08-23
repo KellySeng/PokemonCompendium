@@ -7,10 +7,6 @@ type DisplayStatsProps = {
 
 export default class DisplayStats extends React.Component<DisplayStatsProps> {
 
-    constructor(props : DisplayStatsProps) {
-        super(props)
-    }
-
     getPokemonStatRankByValue(value: number) {
         if(value < 30) return "rank-1"
         if(value >= 30 && value < 60) return "rank-2"

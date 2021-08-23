@@ -8,9 +8,9 @@ type DisplayTypeRelationsProps = {
 
 export default function DisplayTypeEffectiveness ({typeRelations, types}: DisplayTypeRelationsProps) : JSX.Element {
     const resistanceLabels = [
-        {name: "Neutral", condition: (value: number) => value == 1 },
+        {name: "Neutral", condition: (value: number) => value === 1 },
         {name: "Weak to", condition: (value: number) => value > 1 },
-        {name: "Immune to", condition: (value: number) => value == 0 },
+        {name: "Immune to", condition: (value: number) => value === 0 },
         {name: "Resistant to", condition: (value: number) => value < 1 && value > 0 }
     ]
 

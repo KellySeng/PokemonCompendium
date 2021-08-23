@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useReducer} from 'react'
-import { InputGroup, FormControl, DropdownButton, Dropdown, Button, Spinner, Col, Row, Container, Media } from 'react-bootstrap'
+import { InputGroup, FormControl, Button, Container } from 'react-bootstrap'
 import {fetchPokemonData, fetchTypesData} from '../api/fetchPokemonData'
 import reducer from '../reducer/Reducer'
 import DisplayPokemon from './DisplayPokemon'
@@ -20,7 +20,7 @@ export default function SearchPokemon ({searchCategories, types}: PokemonTypings
     }, [types])
 
     const[state, dispatch] = useReducer(reducer, searchPokemonState)
-    const { categorySelected, valueSearched } = searchPokemonState
+    const { valueSearched } = searchPokemonState
     return <Container>
           <InputGroup className="mb-3">
             <FormControl 

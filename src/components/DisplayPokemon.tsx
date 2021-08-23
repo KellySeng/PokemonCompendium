@@ -1,6 +1,5 @@
 import * as React from "react"
-import { Media, Card, Badge, ListGroup, Container, Row, Col } from 'react-bootstrap'
-import DisplaySprites from './DisplaySprites'
+import { Card, Badge, ListGroup, Row, Col } from 'react-bootstrap'
 import DisplayTypes from './DisplayTypes'
 import DisplayTypeEffectiveness from './DisplayTypeEffectiveness'
 import DisplayStats from './DisplayStats'
@@ -12,10 +11,6 @@ type DisplayPokemonProps = {
 }
 
 export default class DisplayPokemon extends React.Component<DisplayPokemonProps> {
-
-    constructor(props: DisplayPokemonProps) {
-        super(props)
-    }
 
     render() {
         const {pokemon, types} = this.props
