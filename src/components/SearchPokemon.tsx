@@ -21,7 +21,7 @@ export default function SearchPokemon ({searchCategories, types}: PokemonTypings
 
     const[state, dispatch] = useReducer(reducer, searchPokemonState)
     const { valueSearched } = searchPokemonState
-    return <Container>
+    return <Container className="card-style">
           <InputGroup className="mb-3">
             <FormControl 
                 aria-describedby="basic-addon1" 
