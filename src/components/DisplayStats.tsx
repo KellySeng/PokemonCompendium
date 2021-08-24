@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Table, ProgressBar} from "react-bootstrap"
+import {Table, ProgressBar, Card} from "react-bootstrap"
 
 type DisplayStatsProps = {
     stats: PokemonTypings.PokemonBaseStats[]
@@ -20,24 +20,28 @@ export default class DisplayStats extends React.Component<DisplayStatsProps> {
         const stats = this.props.stats
         return (
             <div>
-                <h2 className="title">Base Stats</h2>
-                <Table responsive size="sm">
-                    <tbody>
-                        {stats.map( item => {
-                            return (
+                <Card className="card-style">
+                    <Card.Header as="h5" className="title">Base Stats</Card.Header>
+                    <Card.Body>
+                    <Table responsive size="sm">
+                        <tbody>
+                            {stats.map( item => {
+                                return (
+                                <tr>
+                                    <td className="stat-name">{item.stat.name.replace('-', ' ')}</td>
+                                    <td className="stat-value">{item.base_stat}</td>
+                                    <td className="stat-bar"><ProgressBar variant={this.getPokemonStatRankByValue(item.base_stat)} max={255} now={item.base_stat}/></td>
+                                </tr>
+                            )})}   
                             <tr>
-                                <td className="stat-name">{item.stat.name.replace('-', ' ')}</td>
-                                <td className="stat-value">{item.base_stat}</td>
-                                <td className="stat-bar"><ProgressBar variant={this.getPokemonStatRankByValue(item.base_stat)} max={255} now={item.base_stat}/></td>
+                                <td className="stat-name">Total</td>
+                                <td className="stat-value">{stats.map(item => item.base_stat).reduce(function(a,b) { return a + b })}</td>
+                                <td className="stat-bar"></td>
                             </tr>
-                        )})}   
-                         <tr>
-                            <td className="stat-name">Total</td>
-                            <td className="stat-value">{stats.map(item => item.base_stat).reduce(function(a,b) { return a + b })}</td>
-                            <td className="stat-bar"></td>
-                        </tr>
-                    </tbody>
-                </Table>
+                        </tbody>
+                    </Table>
+                    </Card.Body>
+                </Card>
             </div>
         )
     }

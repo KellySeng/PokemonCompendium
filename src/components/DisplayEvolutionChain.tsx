@@ -10,10 +10,6 @@ type DisplayEvolutionChainProps = {
 
 export default class DisplayEvolutionChain extends React.Component<DisplayEvolutionChainProps> {
 
-    constructor(props: DisplayEvolutionChainProps) {
-        super(props)
-    }
-
     render() {
         const { types } = this.props
         return (

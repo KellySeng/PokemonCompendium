@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Nav, Tab, Col, Row, Container, Tabs } from 'react-bootstrap'
+import { Nav, Tab, Col, Row, Card } from 'react-bootstrap'
 
 type DisplaySpritesProps = {
     sprites: PokemonTypings.PokemonSprite
@@ -7,15 +7,13 @@ type DisplaySpritesProps = {
 
 export default class DisplaySprites extends React.Component<DisplaySpritesProps> {
 
-    constructor(props : DisplaySpritesProps) {
-        super(props)
-    }
-
     render() {
         const {front_default, back_default, front_shiny, back_shiny} = this.props.sprites
         return (
             <div>
-                <h2 className="title">Sprites</h2>
+                <Card className="card-style">
+                <Card.Header as="h5" className="title">Sprites</Card.Header>
+                <Card.Body>
                 <Tab.Container id="left-tabs-example" defaultActiveKey="default">
                     <Row>
                     <Col sm={3}>
@@ -31,17 +29,19 @@ export default class DisplaySprites extends React.Component<DisplaySpritesProps>
                     <Col sm={9}>
                         <Tab.Content>
                         <Tab.Pane eventKey="default">
-                        <img loading="lazy"  src={front_default}/>
-                        <img loading="lazy" src={back_default}/>
+                        <img alt="" loading="lazy" src={front_default}/>
+                        <img alt="" loading="lazy" src={back_default}/>
                         </Tab.Pane>
                         <Tab.Pane eventKey="shiny">
-                        <img loading="lazy" src={front_shiny}/>
-                        <img loading="lazy" alt={"loading"} src={back_shiny}/>
+                        <img alt="" loading="lazy" src={front_shiny}/>
+                        <img loading="lazy" alt="" src={back_shiny}/>
                         </Tab.Pane>
                         </Tab.Content>
                     </Col>
                     </Row>
                 </Tab.Container>
+                </Card.Body>
+                </Card>
             </div>
         )
     }

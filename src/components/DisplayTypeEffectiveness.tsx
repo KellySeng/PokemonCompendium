@@ -1,4 +1,4 @@
-import { Table } from 'react-bootstrap'
+import { Table, Card } from 'react-bootstrap'
 import DisplayTypes from "./DisplayTypes"
 
 type DisplayTypeRelationsProps = {
@@ -27,7 +27,9 @@ export default function DisplayTypeEffectiveness ({typeRelations, types}: Displa
     })
 
     return <div>
-                <h2 className="title">Type Effectiveness</h2>
+        <Card className="card-style">
+                <Card.Header as="h5" className="title">Type Effectiveness</Card.Header>
+                <Card.Body>
                 <Table hover bordered>
                     <thead>
                         <tr>
@@ -51,5 +53,7 @@ export default function DisplayTypeEffectiveness ({typeRelations, types}: Displa
                         })}
                     </tbody>
                 </Table>
-            </div>
+            </Card.Body>
+        </Card>
+    </div>
 }
